@@ -71,6 +71,9 @@ class _TodoScreenState extends State<TodoScreen> {
                     _controller.clear();
                   },
                   child: const Text("Add Todo")),
+              const SizedBox(
+                height: 40,
+              ),
               Consumer<TodoViewModel>(builder: (context, todoViewModel, child) {
                 if (todoViewModel.loading) {
                   return const Padding(
