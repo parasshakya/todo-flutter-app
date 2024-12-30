@@ -64,11 +64,13 @@ class _TodoScreenState extends State<TodoScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    context.read<TodoViewModel>().addTodoItem(TodoItem(
-                        id: generateRandomNumber(),
-                        title: _controller.text.trim(),
-                        isCompleted: false));
-                    _controller.clear();
+                    if (_controller.text.trim().isNotEmpty) {
+                      context.read<TodoViewModel>().addTodoItem(TodoItem(
+                          id: generateRandomNumber(),
+                          title: _controller.text.trim(),
+                          isCompleted: false));
+                      _controller.clear();
+                    }
                   },
                   child: const Text("Add Todo")),
               const SizedBox(
