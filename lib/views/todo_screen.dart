@@ -54,6 +54,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: TextField(
                   decoration: InputDecoration(
+                      hintText: "Enter Todo Title",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8))),
                   controller: _controller,
