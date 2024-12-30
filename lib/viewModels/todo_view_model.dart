@@ -35,6 +35,11 @@ class TodoViewModel extends ChangeNotifier {
     }
   }
 
+  deleteTodo(TodoItem todoItem) {
+    _todoItems.removeWhere((element) => element.id == todoItem.id);
+    notifyListeners();
+  }
+
   updateTodo(TodoItem todoItem) {
     int index = todoItems.indexWhere((element) => element.id == todoItem.id);
 

@@ -94,12 +94,24 @@ class _TodoScreenState extends State<TodoScreen> {
                       itemBuilder: (context, index) {
                         final todoItem = todoViewModel.todoItems[index];
                         return ListTile(
+                            key: ValueKey(todoItem.id),
                             title: Text(todoItem.title),
-                            trailing: Checkbox(
-                                value: todoItem.isCompleted,
-                                onChanged: (value) => todoViewModel.updateTodo(
-                                      todoItem.copyWith(isCompleted: value),
-                                    )));
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Checkbox(
+                                    value: todoItem.isCompleted,
+                                    onChanged: (value) =>
+                                        todoViewModel.updateTodo(
+                                          todoItem.copyWith(isCompleted: value),
+                                        )),
+                                IconButton(
+                                    onPressed: () {
+                                      todoViewModel.deleteTodo(todoItem);
+                                    },
+                                    icon: const Icon(Icons.delete))
+                              ],
+                            ));
                       }),
                 );
               })
