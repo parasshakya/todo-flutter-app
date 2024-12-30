@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/helper.dart';
-import 'package:todo_app/theme_view_model.dart';
-import 'package:todo_app/todo_schema.dart';
-import 'package:todo_app/todo_view_model.dart';
+import 'package:todo_app/viewModels/theme_view_model.dart';
+import 'package:todo_app/schema/todo_schema.dart';
+import 'package:todo_app/viewModels/todo_view_model.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -50,11 +50,14 @@ class _TodoScreenState extends State<TodoScreen> {
               const SizedBox(
                 height: 20,
               ),
-              TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8))),
-                controller: _controller,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8))),
+                  controller: _controller,
+                ),
               ),
               const SizedBox(
                 height: 20,

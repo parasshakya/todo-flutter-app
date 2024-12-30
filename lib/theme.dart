@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeClass {
+class CustomTheme {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
     colorScheme: const ColorScheme.dark(),

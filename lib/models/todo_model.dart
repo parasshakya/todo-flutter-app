@@ -1,4 +1,4 @@
-import 'package:todo_app/todo_schema.dart';
+import 'package:todo_app/schema/todo_schema.dart';
 
 class TodoModel {
   Future<List<TodoItem>> getTodoItems() async {

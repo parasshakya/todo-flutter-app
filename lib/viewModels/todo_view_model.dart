@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/todo_model.dart';
-import 'package:todo_app/todo_schema.dart';
+import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/schema/todo_schema.dart';
 
 class TodoViewModel extends ChangeNotifier {
   final TodoModel todoModel;

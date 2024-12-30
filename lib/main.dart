@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/theme.dart';
-import 'package:todo_app/theme_view_model.dart';
-import 'package:todo_app/todo_model.dart';
-import 'package:todo_app/todo_screen.dart';
-import 'package:todo_app/todo_view_model.dart';
+import 'package:todo_app/viewModels/theme_view_model.dart';
+import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/views/todo_screen.dart';
+import 'package:todo_app/viewModels/todo_view_model.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -25,8 +25,8 @@ class MainApp extends StatelessWidget {
     final themeViewModel = Provider.of<ThemeViewModel>(context);
     return MaterialApp(
         themeMode: themeViewModel.themeMode,
-        darkTheme: ThemeClass.darkTheme,
-        theme: ThemeClass.lightTheme,
+        darkTheme: CustomTheme.darkTheme,
+        theme: CustomTheme.lightTheme,
         home: const TodoScreen());
   }
 }
