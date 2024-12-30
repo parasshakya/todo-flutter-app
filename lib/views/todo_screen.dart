@@ -87,6 +87,12 @@ class _TodoScreenState extends State<TodoScreen> {
                   return const Text(
                       "Something went wrong, Please try again later");
                 }
+
+                if (todoViewModel.todoItems.isEmpty) {
+                  return const Center(
+                    child: Text("No todo items found"),
+                  );
+                }
                 return Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
