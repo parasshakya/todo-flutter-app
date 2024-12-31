@@ -1,26 +1,25 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:todo_app/helper.dart';
 import 'package:todo_app/viewModels/theme_view_model.dart';
 import 'package:todo_app/schema/todo_schema.dart';
 import 'package:todo_app/viewModels/todo_view_model.dart';
 
-class TodoScreen extends StatefulWidget {
+class TodoScreen extends ConsumerStatefulWidget {
   const TodoScreen({super.key});
 
   @override
-  State<TodoScreen> createState() => _TodoScreenState();
+  ConsumerState<TodoScreen> createState() => _TodoScreenState();
 }
 
-class _TodoScreenState extends State<TodoScreen> {
+class _TodoScreenState extends ConsumerState<TodoScreen> {
   final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<TodoViewModel>().loadTodoItems();
+      ref.read(todoNotifierProvider).loadTodoItems();
     });
 
     super.initState();
@@ -34,11 +33,12 @@ class _TodoScreenState extends State<TodoScreen> {
           title: const Text("Welcome to Todo App"),
           centerTitle: true,
           actions: [
-            Consumer<ThemeViewModel>(
-                builder: (context, themeViewModel, child) => Switch.adaptive(
-                      value: themeViewModel.isDarkMode,
-                      onChanged: (value) => themeViewModel.toggleTheme(value),
-                    ))
+            Consumer(
+                builder: (context, ref, child) => Switch.adaptive(
+                      value: ref.watch(themeNotifierProvider).isDarkMode,
+                      onChanged: (value) =>
+                          ref.read(themeNotifierProvider).toggleTheme(value),
+                    )),
           ],
         ),
         body: Center(
@@ -66,7 +66,7 @@ class _TodoScreenState extends State<TodoScreen> {
               ElevatedButton(
                   onPressed: () {
                     if (_controller.text.trim().isNotEmpty) {
-                      context.read<TodoViewModel>().addTodoItem(TodoItem(
+                      ref.read(todoNotifierProvider).addTodoItem(TodoItem(
                           id: generateRandomNumber(),
                           title: _controller.text.trim(),
                           isCompleted: false));
@@ -77,7 +77,8 @@ class _TodoScreenState extends State<TodoScreen> {
               const SizedBox(
                 height: 40,
               ),
-              Consumer<TodoViewModel>(builder: (context, todoViewModel, child) {
+              Consumer(builder: (context, ref, child) {
+                final todoViewModel = ref.watch(todoNotifierProvider);
                 if (todoViewModel.loading) {
                   return const Padding(
                     padding: EdgeInsets.all(8.0),

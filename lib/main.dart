@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/theme.dart';
 import 'package:todo_app/viewModels/theme_view_model.dart';
-import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/views/todo_screen.dart';
-import 'package:todo_app/viewModels/todo_view_model.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => TodoViewModel(todoModel: TodoModel()),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => ThemeViewModel(),
-    ),
-  ], child: const MainApp()));
+  runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final themeViewModel = Provider.of<ThemeViewModel>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeViewModel = ref.watch(themeNotifierProvider);
     return MaterialApp(
         themeMode: themeViewModel.themeMode,
         darkTheme: CustomTheme.darkTheme,

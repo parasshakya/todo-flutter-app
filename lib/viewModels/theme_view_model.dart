@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeViewModel extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.dark;
@@ -10,3 +11,5 @@ class ThemeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+final themeNotifierProvider = ChangeNotifierProvider((ref) => ThemeViewModel());

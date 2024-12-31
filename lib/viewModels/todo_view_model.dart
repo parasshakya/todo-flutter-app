@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/schema/todo_schema.dart';
 
@@ -49,3 +50,7 @@ class TodoViewModel extends ChangeNotifier {
     }
   }
 }
+
+final todoNotifierProvider = ChangeNotifierProvider<TodoViewModel>((ref) {
+  return TodoViewModel(todoModel: TodoModel());
+});
