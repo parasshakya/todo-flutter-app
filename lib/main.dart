@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_app/theme.dart';
 import 'package:todo_app/viewModels/theme_view_model.dart';
 import 'package:todo_app/views/todo_screen.dart';
