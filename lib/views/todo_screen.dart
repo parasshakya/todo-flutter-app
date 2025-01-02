@@ -19,7 +19,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(todoNotifierProvider).loadTodoItems();
+      ref.read(todoChangeNotifierProvider).loadTodoItems();
     });
 
     super.initState();
@@ -35,9 +35,10 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
           actions: [
             Consumer(
                 builder: (context, ref, child) => Switch.adaptive(
-                      value: ref.watch(themeNotifierProvider).isDarkMode,
-                      onChanged: (value) =>
-                          ref.read(themeNotifierProvider).toggleTheme(value),
+                      value: ref.watch(themeChangeNotifierProvider).isDarkMode,
+                      onChanged: (value) => ref
+                          .read(themeChangeNotifierProvider)
+                          .toggleTheme(value),
                     )),
           ],
         ),
@@ -66,7 +67,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
               ElevatedButton(
                   onPressed: () {
                     if (_controller.text.trim().isNotEmpty) {
-                      ref.read(todoNotifierProvider).addTodoItem(TodoItem(
+                      ref.read(todoChangeNotifierProvider).addTodoItem(TodoItem(
                           id: generateRandomNumber(),
                           title: _controller.text.trim(),
                           isCompleted: false));
@@ -78,7 +79,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
                 height: 40,
               ),
               Consumer(builder: (context, ref, child) {
-                final todoViewModel = ref.watch(todoNotifierProvider);
+                final todoViewModel = ref.watch(todoChangeNotifierProvider);
                 if (todoViewModel.loading) {
                   return const Padding(
                     padding: EdgeInsets.all(8.0),

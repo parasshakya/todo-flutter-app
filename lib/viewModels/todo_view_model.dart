@@ -51,6 +51,6 @@ class TodoViewModel extends ChangeNotifier {
   }
 }
 
-final todoNotifierProvider = ChangeNotifierProvider<TodoViewModel>((ref) {
+final todoChangeNotifierProvider = ChangeNotifierProvider<TodoViewModel>((ref) {
   return TodoViewModel(todoModel: TodoModel());
 });

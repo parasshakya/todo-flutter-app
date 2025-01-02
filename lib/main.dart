@@ -14,7 +14,7 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeViewModel = ref.watch(themeNotifierProvider);
+    final themeViewModel = ref.watch(themeChangeNotifierProvider);
     return MaterialApp(
         themeMode: themeViewModel.themeMode,
         darkTheme: CustomTheme.darkTheme,

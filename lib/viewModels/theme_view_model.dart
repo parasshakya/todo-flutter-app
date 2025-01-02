@@ -12,4 +12,5 @@ class ThemeViewModel extends ChangeNotifier {
   }
 }
 
-final themeNotifierProvider = ChangeNotifierProvider((ref) => ThemeViewModel());
+final themeChangeNotifierProvider =
+    ChangeNotifierProvider((ref) => ThemeViewModel());
