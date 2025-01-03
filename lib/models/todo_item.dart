@@ -3,7 +3,7 @@ class TodoItem {
   String title;
   bool isCompleted;
 
-  TodoItem({required this.id, required this.title, required this.isCompleted});
+  TodoItem({required this.id, required this.title, this.isCompleted = false});
 
   TodoItem copyWith({
     int? id,
@@ -15,5 +15,10 @@ class TodoItem {
       title: title ?? this.title,
       isCompleted: isCompleted ?? this.isCompleted,
     );
+  }
+
+  factory TodoItem.fromJson(Map<String, dynamic> json) {
+    return TodoItem(
+        id: json["id"], title: json["title"], isCompleted: json["completed"]);
   }
 }

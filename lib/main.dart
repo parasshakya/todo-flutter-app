@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/cubits/theme_cubit/theme_cubit.dart';
+import 'package:todo_app/cubits/theme_cubit/theme_state.dart';
+import 'package:todo_app/cubits/todos_cubit/todos_cubit.dart';
 import 'package:todo_app/theme.dart';
-import 'package:todo_app/viewModels/theme_view_model.dart';
-import 'package:todo_app/models/todo_model.dart';
-import 'package:todo_app/views/todo_screen.dart';
-import 'package:todo_app/viewModels/todo_view_model.dart';
+import 'package:todo_app/screens/todo_screen.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => TodoViewModel(todoModel: TodoModel()),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => ThemeViewModel(),
-    ),
-  ], child: const MainApp()));
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => ThemeCubit()),
+      BlocProvider(create: (_) => TodosCubit())
+    ],
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -22,11 +21,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeViewModel = Provider.of<ThemeViewModel>(context);
-    return MaterialApp(
-        themeMode: themeViewModel.themeMode,
-        darkTheme: CustomTheme.darkTheme,
-        theme: CustomTheme.lightTheme,
-        home: const TodoScreen());
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+            themeMode: state.themeMode,
+            darkTheme: CustomTheme.darkTheme,
+            theme: CustomTheme.lightTheme,
+            home: const TodoScreen());
+      },
+    );
   }
 }
