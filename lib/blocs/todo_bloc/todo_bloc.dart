@@ -21,6 +21,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<TodoDeleted>(_onTodoDeleted);
   }
 
+  @override
+  void onTransition(Transition<TodoEvent, TodoState> transition) {
+    super.onTransition(transition);
+    print(transition);
+  }
+
   _onTodoLoaded(TodoLoaded event, Emitter<TodoState> emit) async {
     try {
       emit(TodoLoadInProgress());
