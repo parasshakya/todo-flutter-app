@@ -1,23 +1,23 @@
 part of 'todo_bloc.dart';
 
-abstract class TodoEvent {}
+sealed class TodoEvent {}
 
-class LoadTodos extends TodoEvent {}
+final class TodoLoaded extends TodoEvent {}
 
-class AddTodo extends TodoEvent {
+final class TodoAdded extends TodoEvent {
   final String title;
 
-  AddTodo(this.title);
+  TodoAdded(this.title);
 }
 
-class ToggleTodo extends TodoEvent {
+final class TodoToggled extends TodoEvent {
   final String id;
 
-  ToggleTodo(this.id);
+  TodoToggled(this.id);
 }
 
-class DeleteTodo extends TodoEvent {
+final class TodoDeleted extends TodoEvent {
   final String id;
 
-  DeleteTodo(this.id);
+  TodoDeleted(this.id);
 }

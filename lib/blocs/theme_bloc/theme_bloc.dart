@@ -6,9 +6,10 @@ part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(ThemeState(themeMode: ThemeMode.system)) {
-    on<ThemeToggle>((event, emit) {
-      emit(
-          ThemeState(themeMode: event.isOn ? ThemeMode.dark : ThemeMode.light));
-    });
+    on<ThemeToggled>(_onThemeToggled);
+  }
+
+  _onThemeToggled(ThemeToggled event, Emitter<ThemeState> emit) {
+    emit(ThemeState(themeMode: event.isOn ? ThemeMode.dark : ThemeMode.light));
   }
 }

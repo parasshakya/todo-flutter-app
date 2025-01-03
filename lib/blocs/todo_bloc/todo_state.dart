@@ -1,17 +1,23 @@
 part of 'todo_bloc.dart';
 
-abstract class TodoState {}
+sealed class TodoState {}
 
-class TodoInitial extends TodoState {}
-
-class TodoLoaded extends TodoState {
+final class TodoInitial extends TodoState {
   final List<Todo> todos;
 
-  TodoLoaded(this.todos);
+  TodoInitial({required this.todos});
 }
 
-class TodoError extends TodoState {
+final class TodoLoadInProgress extends TodoState {}
+
+final class TodoLoadSuccess extends TodoState {
+  final List<Todo> todos;
+
+  TodoLoadSuccess(this.todos);
+}
+
+final class TodoLoadFailure extends TodoState {
   final String message;
 
-  TodoError(this.message);
+  TodoLoadFailure(this.message);
 }

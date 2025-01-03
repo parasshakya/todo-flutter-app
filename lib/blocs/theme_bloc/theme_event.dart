@@ -1,9 +1,9 @@
 part of 'theme_bloc.dart';
 
-abstract class ThemeEvent {}
+sealed class ThemeEvent {}
 
-class ThemeToggle extends ThemeEvent {
+final class ThemeToggled extends ThemeEvent {
   final bool isOn;
 
-  ThemeToggle(this.isOn);
+  ThemeToggled(this.isOn);
 }
